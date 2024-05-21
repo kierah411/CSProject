@@ -17,6 +17,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener{
     int boardHeight;
     int tileSize = 25;
     Tile snakeHead;
+    ArrayList<Tile> snakeBody;
     Tile food;
     Random random;
     Timer gameLoop;
@@ -32,6 +33,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener{
         setFocusable(true);
 
         snakeHead = new Tile (5, 5);
+        snakeBody = new ArrayList<Tile>();
         food = new Tile (10, 10);
         random = new Random();
         placeFood();
@@ -80,25 +82,24 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP){
+        if (e.getKeyCode() == KeyEvent.VK_UP && velocityY != 1){
             velocityX = 0;
             velocityY = -1;
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN){
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN && velocityY != -1){
             velocityX = 0;
             velocityY = 1;
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT && velocityX != 1){
             velocityX = -1;
             velocityY = 0;
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT && velocityX != -1){
             velocityX = 1;
             velocityY = 0;
-        }
+        }     
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
     }
-
 
     @Override
     public void keyReleased(KeyEvent e) {
